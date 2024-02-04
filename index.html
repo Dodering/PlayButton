@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #2c3e50;
+    }
+
+    .play-pause-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      outline: none;
+    }
+
+    .play-pause-button {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      background: #3498db;
+      background: linear-gradient(to bottom, #3498db, #2980b9);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), color 0.3s ease-in-out;
+      outline: none;
+      color: #fff;
+      border: 4px solid #2c3e50;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .play-pause-button:hover {
+      background: linear-gradient(to bottom, #2980b9, #3498db);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .play-pause-button::before {
+      content: "";
+      position: absolute;
+      margin-left: 12px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 24px 0 24px 40px;
+      border-color: transparent transparent transparent #fff;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      opacity: 1;
+    }
+
+    .animation {
+      animation: playPauseAnimation 0.3s ease-in-out forwards, rotateAnimation 0.5s linear forwards;
+    }
+
+    .pulsate {
+      animation: pulsateAnimation 1s ;
+    }
+
+    @keyframes playPauseAnimation {
+      0% {
+        transform: scale(1);
+      }
+      20% {
+        transform: scale(1.2);
+      }
+      50% {
+        transform: scale(1.5);
+      }
+      80% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1.4);
+      }
+    }
+
+    @keyframes pulsateAnimation {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    .play-pause-button:active {
+      animation: clickAnimation 0.10s ease-in-out;
+    }
+
+    .play-pause-text {
+      position: absolute;
+      font-size: 12px;
+      bottom: -20px;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .play-pause-button:hover .play-pause-text {
+      opacity: 1;
+    }
+
+    /* Nouvelle classe pour le triangle blanc */
+    .triangle {
+      background-color: #fff;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: background 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      opacity: 0.8;
+    }
+
+    .play-pause-button:hover .triangle {
+      background: #fff; /* Changez la couleur de fond au survol */
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="play-pause-container">
+  <div class="play-pause-button pulsate" id="playPauseButton">
+    <div class="play-pause-text">Play</div>
+    <!-- Ajout du triangle blanc -->
+    <div class="triangle"></div>
+  </div>
+</div>
+
+<script>
+  const playPauseButton = document.getElementById('playPauseButton');
+  playPauseButton.addEventListener('click', togglePlayPause);
+
+  function togglePlayPause() {
+    playPauseButton.classList.toggle('playing');
+    playPauseButton.classList.toggle('animation');
+  }
+</script>
+
+</body>
+</html>
